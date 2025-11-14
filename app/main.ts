@@ -9,8 +9,12 @@ const rl = readline.createInterface({
 
 const answer = await rl.question("$ ");
 
-console.log(`Command by user : `, answer);
+const [command, ...params] = answer.split(/\s/g);
 
-rl.write(commandHandler(answer));
+console.log(`Command by user : ${command} and parameters : `, params);
+
+const returnStr = commandHandler(command, params);
+
+rl.write(returnStr);
 
 rl.close();
