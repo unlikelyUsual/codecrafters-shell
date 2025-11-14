@@ -11,7 +11,7 @@ const answer = await rl.question("$ ");
 
 const [command, ...params] = answer.split(/\s/g);
 
-console.log(`Command by user : ${command} and parameters : `, params);
+// console.log(`Command by user : ${command} and parameters : `, params);
 
 const returnStr = commandHandler(command, params);
 
