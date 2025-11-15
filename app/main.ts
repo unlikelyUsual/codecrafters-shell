@@ -11,22 +11,18 @@ const mainLoop = async () => {
   while (true) {
     const answer = await rl.question("$ ");
 
-    const trimmedAnswer = answer.trim();
-
-    if (
-      trimmedAnswer.toLowerCase() === "exit" ||
-      trimmedAnswer.toLowerCase() === "quit"
-    ) {
-      console.log("Goodbye!");
-      rl.close();
-      process.exit(0);
-    }
+    const trimmedAnswer = answer.trim().toLocaleLowerCase();
 
     if (!trimmedAnswer) {
       continue;
     }
 
     const [command, ...params] = trimmedAnswer.split(/\s+/g);
+
+    if (command === "exit" || command === "quit") {
+      rl.close();
+      process.exit(0);
+    }
 
     try {
       const returnStr: string = commandHandler(command, params);
