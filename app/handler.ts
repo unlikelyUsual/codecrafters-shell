@@ -10,9 +10,13 @@ const handleType = (...params: string[]): string => {
   else return `${command}: command not found`;
 };
 
+const handleExit = (...params: string[]): string => {
+  return "";
+};
 const commandMap: Record<COMMANDS, Function> = {
   [COMMANDS.ECHO]: handleEcho,
   [COMMANDS.TYPE]: handleType,
+  [COMMANDS.EXIT]: handleExit,
 };
 
 const commandHandler = (command: string, params: string[]): string => {
