@@ -39,29 +39,24 @@ const mainLoop = async () => {
   }
 };
 
-// Start the loop
 mainLoop().catch((error) => {
   console.error("Fatal error:", error);
   rl.close();
   process.exit(1);
 });
 
-// Handle Ctrl+C gracefully
 process.on("SIGINT", () => {
   console.log("\nGoodbye!");
   rl.close();
   process.exit(0);
 });
 
-// Handle termination signals
 process.on("SIGTERM", () => {
   console.log("\nTerminating...");
   rl.close();
   process.exit(0);
 });
 
-// Note: SIGKILL cannot be caught or handled
-// Cleanup on process exit
 process.on("exit", (code) => {
   rl.close();
 });
