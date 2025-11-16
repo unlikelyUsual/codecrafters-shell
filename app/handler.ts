@@ -7,7 +7,7 @@ const handleEcho = (...params: string[]): string => {
 const handleType = (...params: string[]): string => {
   const command = params[0];
   if (command in commandMap) return `${params[0]} is a shell builtin`;
-  else return `${command}: command not found`;
+  else return `${command}: not found`;
 };
 
 const handleExit = (...params: string[]): string => {
