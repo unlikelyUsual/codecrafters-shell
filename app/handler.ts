@@ -5,7 +5,9 @@ const handleEcho = (...params: string[]): string => {
 };
 
 const handleType = (...params: string[]): string => {
-  return `${params[0]} is a shell builtin`;
+  const command = params[0];
+  if (command in commandMap) return `${params[0]} is a shell builtin`;
+  else return `${command}: command not found`;
 };
 
 const commandMap: Record<COMMANDS, Function> = {
