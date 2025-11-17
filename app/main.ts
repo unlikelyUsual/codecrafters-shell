@@ -7,6 +7,9 @@ const rl = readline.createInterface({
   output,
 });
 
+const pathEnv = process.env.PATH;
+export const PATHS: string[] = pathEnv?.split(/\:/g) ?? [];
+
 const mainLoop = async () => {
   while (true) {
     const answer = await rl.question("$ ");
