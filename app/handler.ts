@@ -1,4 +1,5 @@
 import COMMANDS from "./Commands";
+import { getExecutableDirectories } from "./utils/files";
 
 const handleEcho = (...params: string[]): string => {
   return params.join(" ");
@@ -6,8 +7,9 @@ const handleEcho = (...params: string[]): string => {
 
 const handleType = (...params: string[]): string => {
   const command = params[0];
-  //Checking if command exit in path
   if (command in commandMap) return `${params[0]} is a shell builtin`;
+  else if (getExecutableDirectories(command))
+    return `${command} is ${getExecutableDirectories(command)}`;
   else return `${command}: not found`;
 };
 

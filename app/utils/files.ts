@@ -2,10 +2,12 @@ import { accessSync, constants, existsSync } from "node:fs";
 import { join } from "node:path";
 import { PATHS } from "../main";
 
-const getExecutableDirectories = (fileName: string) => {
+export const getExecutableDirectories = (fileName: string): string => {
   for (const directory of PATHS) {
     const fullPath = join(directory, fileName);
+    if (isExecutable(fullPath)) return fullPath;
   }
+  return "";
 };
 
 const isExecutable = (path: string) => {
