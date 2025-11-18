@@ -8,9 +8,10 @@ const handleEcho = (...params: string[]): string => {
 const handleType = (...params: string[]): string => {
   const command = params[0];
   if (command in commandMap) return `${params[0]} is a shell builtin`;
-  else if (getExecutableDirectories(command))
-    return `${command} is ${getExecutableDirectories(command)}`;
-  else return `${command}: not found`;
+  else {
+    const path = getExecutableDirectories(command);
+    return path ? `${command} is ${path}` : `${command}: not found`;
+  }
 };
 
 const handleExit = (...params: string[]): string => {
