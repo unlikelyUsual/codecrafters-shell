@@ -27,10 +27,10 @@ const mainLoop = async () => {
     }
 
     try {
-      const returnStr: string = commandHandler(command, params);
+      const returnStr: string = await commandHandler(command, params);
 
       if (returnStr) {
-        console.log(returnStr);
+        rl.write(returnStr);
       }
     } catch (error) {
       console.error(

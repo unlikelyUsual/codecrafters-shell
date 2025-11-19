@@ -1,5 +1,6 @@
 import COMMANDS from "./Commands";
 import { getExecutableDirectories } from "./utils/files";
+import { runWithSpawn } from "./utils/process";
 
 const handleEcho = (...params: string[]): string => {
   return params.join(" ");
@@ -23,12 +24,25 @@ const commandMap: Record<COMMANDS, Function> = {
   [COMMANDS.EXIT]: handleExit,
 };
 
-const commandHandler = (command: string, params: string[]): string => {
+const commandHandler = async (
+  command: string,
+  params: string[]
+): Promise<string> => {
   const commandKey = command as COMMANDS;
   if (commandKey in commandMap) {
     return commandMap[commandKey](...params);
   } else {
-    return `${command}: command not found`;
+    const path = getExecutableDirectories(commandKey);
+    if (path) {
+      try {
+        return await runWithSpawn(path, params);
+      } catch (error) {
+        console.error("Error:", error);
+        return `Error in running with spawn`;
+      }
+    } else {
+      return `${command}: command not found`;
+    }
   }
 };
 
