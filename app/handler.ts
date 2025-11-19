@@ -35,7 +35,7 @@ const commandHandler = async (
     const path = getExecutableDirectories(commandKey);
     if (path) {
       try {
-        return await runWithSpawn(path, params);
+        return await runWithSpawn(commandKey, params);
       } catch (error) {
         console.error("Error:", error);
         return `Error in running with spawn`;

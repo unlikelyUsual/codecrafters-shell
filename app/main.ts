@@ -13,7 +13,7 @@ const mainLoop = async () => {
   while (true) {
     const answer = await rl.question("$ ");
 
-    const trimmedAnswer = answer.trim().toLocaleLowerCase();
+    const trimmedAnswer = answer.trim();
 
     if (!trimmedAnswer) {
       continue;
@@ -27,10 +27,13 @@ const mainLoop = async () => {
     }
 
     try {
-      const returnStr: string = await commandHandler(command, params);
+      const returnStr: string = await commandHandler(
+        command.toLocaleLowerCase(),
+        params
+      );
 
       if (returnStr) {
-        rl.write(returnStr);
+        console.log(returnStr);
       }
     } catch (error) {
       console.error(
