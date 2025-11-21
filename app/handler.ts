@@ -18,10 +18,16 @@ const handleType = (...params: string[]): string => {
 const handleExit = (...params: string[]): string => {
   return "";
 };
+
+const handlePwd = (): string => {
+  return process.cwd();
+};
+
 const commandMap: Record<COMMANDS, Function> = {
   [COMMANDS.ECHO]: handleEcho,
   [COMMANDS.TYPE]: handleType,
   [COMMANDS.EXIT]: handleExit,
+  [COMMANDS.PWD]: handlePwd,
 };
 
 const commandHandler = async (
