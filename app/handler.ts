@@ -23,11 +23,25 @@ const handlePwd = (): string => {
   return process.cwd();
 };
 
+const handleCd = (...params: string[]): string => {
+  const path = params[0];
+  try {
+    const home = process.env.HOME || process.env.USERPROFILE || "/";
+    if (path === "~") process.chdir(home);
+    else process.chdir(path);
+
+    return "";
+  } catch (err) {
+    return `cd: ${path}: No such file or directory`;
+  }
+};
+
 const commandMap: Record<COMMANDS, Function> = {
   [COMMANDS.ECHO]: handleEcho,
   [COMMANDS.TYPE]: handleType,
   [COMMANDS.EXIT]: handleExit,
   [COMMANDS.PWD]: handlePwd,
+  [COMMANDS.CD]: handleCd,
 };
 
 const commandHandler = async (
